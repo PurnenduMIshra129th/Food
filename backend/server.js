@@ -6,7 +6,7 @@ const userRouter = require("./routes/userRoutes.js");
 const productRouter = require("./routes/productRoutes.js");
 const uploadRouter = require("./routes/uploadRoutes.js");
 const orderRouter = require("./routes/orderRoutes.js");
-
+process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
 dotenv.config();
 mongoose
   .connect(process.env.MONGODB_URI)

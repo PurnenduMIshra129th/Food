@@ -8,6 +8,7 @@ const generateProxyPath = (path) => ({
   [path]: {
     target: useitforlocal,
     pathRewrite: { [`^${path}`]: '' },
+    // secure: false
   },
 });
 
