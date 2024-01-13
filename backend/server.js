@@ -6,7 +6,8 @@ const userRouter = require("./routes/userRoutes.js");
 const productRouter = require("./routes/productRoutes.js");
 const uploadRouter = require("./routes/uploadRoutes.js");
 const orderRouter = require("./routes/orderRoutes.js");
-process.env['NODE_TLS_REJECT_UNAUTHORIZED'] = '0';
+const cors = require("cors");
+
 dotenv.config();
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -16,7 +17,7 @@ mongoose
   .catch((err) => {
     console.log(err.message);
   });
-
+  app.use(cors());
 const app = express();
 
 app.use(express.json());
