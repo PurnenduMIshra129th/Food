@@ -18,7 +18,19 @@ mongoose
     console.log(err.message);
   });
   const app = express();
-  app.use(cors());
+  const allowedOrigins = ['https://65a2ebe71e61a3fe9aef54ce--magical-rolypoly-6457e0.netlify.app'];
+
+const corsOptions = {
+  origin: function (origin, callback) {
+    if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
+};
+
+app.use(cors(corsOptions)); // Enable CORS with options
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
