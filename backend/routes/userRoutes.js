@@ -3,7 +3,7 @@ const bcrypt = require("bcryptjs");
 const expressAsyncHandler = require("express-async-handler");
 const jwt = require("jsonwebtoken");
 const User = require("../models/userModel.js");
-const { isAuth, isAdmin, generateToken } = require("../utils.js");
+const { isAuth, isAdmin, generateToken,baseUrl } = require("../utils.js");
 
 const userRouter = express.Router();
 

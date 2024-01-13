@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const expressAsyncHandler = require('express-async-handler');
 const jwt = require('jsonwebtoken');
 const Product = require('../models/productModel.js');
-const { isAuth, isAdmin, generateToken} = require('../utils.js');
+const { isAuth, isAdmin, generateToken,baseUrl} = require('../utils.js');
 const cors = require('cors');
 const productRouter = express.Router();
 productRouter.use(cors());

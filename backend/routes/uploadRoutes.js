@@ -2,7 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const cloudinary = require('cloudinary').v2;
 const streamifier = require('streamifier');
-const { isAdmin, isAuth } = require('../utils.js');
+const { isAdmin, isAuth,baseUrl } = require('../utils.js');
 const cors = require('cors');
 const upload = multer();
 
