@@ -6,6 +6,7 @@ const userRouter = require("./routes/userRoutes.js");
 const productRouter = require("./routes/productRoutes.js");
 const uploadRouter = require("./routes/uploadRoutes.js");
 const orderRouter = require("./routes/orderRoutes.js");
+
 dotenv.config();
 mongoose
   .connect(process.env.MONGODB_URI)
@@ -34,5 +35,5 @@ app.use((err, req, res, next) => {
 
 const port = process.env.PORT || 4000;
 app.listen(port, () => {
-  console.log(`server at http://localhost:${port}`);
+  console.log(`server  Started at:${port}`);
 });

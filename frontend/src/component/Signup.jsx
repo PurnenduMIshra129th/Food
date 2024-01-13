@@ -34,7 +34,7 @@ function Signup() {
           navigate('/');
           
         } catch (err) {
-          console.log(err);
+          console.log(err.response.data);
         }
       };
   return (

@@ -17,7 +17,7 @@ function Login() {
           console.log("user sucessfully logged in")
           navigate('/')
         } catch (err) {
-          console.log(err);
+          console.log(err.response.data);
         }
       };
   return (
