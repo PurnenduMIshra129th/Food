@@ -1,7 +1,7 @@
 import { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import  './css/ManageUser.css'
+import  './css/manageUser.css'
 const initialState = {
     data: [],
     error: null,
