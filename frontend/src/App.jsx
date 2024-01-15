@@ -19,10 +19,17 @@ import EditUser from './component/EditUser';
 import EditProfile from './component/EditProfile';
 import UserOrders from './component/UserOrders';
 import ShowOrders from './component/ShowOrders';
+import { createContext,useReducer } from 'react';
+import { intialState,reducer } from './reducer/useReducer';
+import AfterOrder from './component/AfterOrder';
 
+export const UserContext=createContext();
 function App() {
+  const [state, dispatch] = useReducer(reducer,intialState);
   return (
     <>
+     <UserContext.Provider value={{state,dispatch}}>
+
      <CartProvider>
      <Router>
     <Navbar/>
@@ -44,9 +51,11 @@ function App() {
     <Route path="/updateProfile/:id" element={<EditProfile/>} />
     <Route path="/userOrders" element={<UserOrders/>} />
     <Route path="/showOrders/:id" element={<ShowOrders/>} />
+    <Route path="/afterOrder" element={<AfterOrder/>} />
     </Routes>
     </Router>
      </CartProvider>
+     </UserContext.Provider>
  
     </>
   )

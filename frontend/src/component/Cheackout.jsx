@@ -2,13 +2,14 @@
 import axios from 'axios';
 import { useCart } from './CartContext';
 import { useState,useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 
 function Cheackout() {
   const location = useLocation();
+  const navigate=useNavigate();
   const { orderItem } = location.state !== null && location.state !== undefined ? location.state : { orderItem: null };
   const single_product_price=orderItem != null ?orderItem[0].price * orderItem[0].qty:0;
-  const { state, dispatch } = useCart();
+  const {dispatch } = useCart();
   const storedCart = JSON.parse(localStorage.getItem('cart')) || [];
   const user = JSON.parse(localStorage.getItem('userInfo')) || {};
   
@@ -71,6 +72,7 @@ function Cheackout() {
       .then(response => {
         dispatch({ type: 'RESET_CART' });
         console.log('Order placed successfully:', response.data);
+        navigate('/afterOrder')
       })
       .catch(error => {
         console.error('Error placing order:', error.response.data.message);
@@ -159,7 +161,8 @@ function Cheackout() {
 }
       </div>
     
-        <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Place Order</button> 
+        <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Place Order
+         </button> 
       </form>
     </div> 
     </div>

@@ -1,8 +1,10 @@
-import { useState } from "react";
-import Axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { useState ,useContext} from "react";import Axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from '../App';
+
 function Signup() {
   const navigate=useNavigate();
+  const {dispatch} = useContext(UserContext);
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [hostel, setHostel] = useState("");
@@ -30,6 +32,7 @@ function Signup() {
             confirmPassword
           });
           localStorage.setItem("userInfo", JSON.stringify(data));
+          dispatch({type:"USER",payload:true});
           console.log("user sucessfully signed up")
           navigate('/');
           
@@ -84,6 +87,7 @@ function Signup() {
         <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
         
       </form>
+      <p style={{marginTop: "10%"}}>Already have an account? <Link to="/login" style={{textDecoration: "underline"}}>Login</Link> </p>
     </div> 
     </div>
   )

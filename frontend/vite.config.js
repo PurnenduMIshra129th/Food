@@ -1,8 +1,8 @@
 import react from '@vitejs/plugin-react'
 
 
-const useitforlocal = 'https://abhinasfoodservices.onrender.com';
-// const useitforlocal = 'http://localhost:4000';
+// const useitforlocal = 'https://abhinasfoodservices.onrender.com';
+const useitforlocal = 'http://localhost:4000';
 
 const generateProxyPath = (path) => ({
   [path]: {

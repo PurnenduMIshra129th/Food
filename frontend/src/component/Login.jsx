@@ -1,7 +1,10 @@
-import { useState } from "react";
+import { useState ,useContext} from "react";
 import Axios from 'axios';
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { UserContext } from '../App';
+
 function Login() {
+  const {dispatch} = useContext(UserContext);
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const navigate=useNavigate();
@@ -13,6 +16,7 @@ function Login() {
             email,
             password,
           });
+          dispatch({type:"USER",payload:true});
           localStorage.setItem("userInfo", JSON.stringify(data));
           console.log("user sucessfully logged in")
           navigate('/')
@@ -38,6 +42,7 @@ function Login() {
         <button className="w-100 btn btn-lg btn-primary mt-3" type="submit" >Log in</button>
         
       </form>
+      <p style={{marginTop: "10%"}}>Dont have an account? <Link to="/signup" style={{textDecoration: "underline"}}>Signup</Link> </p>
     </div> 
     </div>
   )
