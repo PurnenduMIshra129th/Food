@@ -2,6 +2,8 @@ import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function EditUser() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
@@ -29,6 +31,7 @@ function EditUser() {
             console.log("User not found");
           } else {
             console.log("An error occurred while fetching user data");
+            toast.error("An error occurred while fetching user data")
           }
         }
         
@@ -54,9 +57,11 @@ function EditUser() {
           }
         );
         console.log('User Update Successfully');
+        toast.success('User Update Successfully')
         navigate('/manageUser');
       } catch (err) {
        console.log(err.response.data);
+       toast.error("Error in updating user details")
       }
     };
   return (

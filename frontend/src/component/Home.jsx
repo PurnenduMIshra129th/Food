@@ -3,6 +3,8 @@ import { useReducer, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const initialState = {
   data: [],
@@ -39,11 +41,12 @@ function Home() {
       const result = await axios.get(`${BASE_URL}/api/products/getProduct`,{
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
-      console.log("data",result.data);
+      // console.log("data",result.data);
       dispatch({ type: "FETCH_SUCCESS", payload: result.data });
     } catch (err) {
       dispatch({ type: "FETCH_ERROR", payload: err.response.data });
       console.log(err.response.data);
+      toast.error("Error in fetching food items")
     }
   };
 

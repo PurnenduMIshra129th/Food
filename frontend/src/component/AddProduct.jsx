@@ -38,11 +38,20 @@ function AddProduct() {
             },
           }
         );
-        console.log('Product updated successfully');
+        console.log('Product Added successfully');
+        toast.success("Product Added successfully")
       } catch (err) {
         console.log(err.response.data);
+        toast.error("Error in adding product")
       }
-      location.reload();
+      setName('');
+      setCategory('')
+      setDescription('')
+      setPrice('')
+      setStatus('')
+      setRating('')
+      setNumReviews('')
+      setImage('')
     };
     
     
@@ -57,9 +66,11 @@ function AddProduct() {
             },
           });
             setImage(data.secure_url);
-          console.log('Image uploaded successfully. click Update to apply it');
+          console.log('Image uploaded successfully. click Add to apply it');
+          toast.success("Image uploaded successfully. click create product to apply it")
         } catch (err) {
           console.log(err);
+          toast.error("Error in image upload")
         }
       };
   return (

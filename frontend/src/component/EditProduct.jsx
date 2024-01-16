@@ -2,6 +2,8 @@ import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function EditProduct() {
     const navigate = useNavigate();
     const params = useParams(); // /product/:id
@@ -35,6 +37,7 @@ function EditProduct() {
             // console.log('image:',data.image);
           } catch (err) {
            console.log(err);
+           toast.error("Error in fetching product details")
           }
         };
         fetchData();
@@ -63,9 +66,11 @@ function EditProduct() {
             }
           );
           console.log('Product Update Successfully');
+          toast.success("Product Update Successfully")
           navigate('/manageProduct');
         } catch (err) {
          console.log(err.response.data);
+         toast.error("Error in updating product details")
         }
       };
     const uploadFileHandler = async (e) => {
@@ -80,8 +85,10 @@ function EditProduct() {
           });
             setImage(data.secure_url);
           console.log('Image uploaded successfully. click Update to apply it');
+          toast.success('Image uploaded successfully. click Update to apply it')
         } catch (err) {
           console.log(err);
+          toast.error("error in uploading image")
         }
       };
   return (

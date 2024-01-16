@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import  './css/manageUser.css'
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
     data: [],
     error: null,
@@ -41,6 +43,7 @@ function ManageUser() {
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_ERROR', payload: err.response.data });
+        toast.error("Error in fetching user details")
       }
     };
   
@@ -58,8 +61,10 @@ function ManageUser() {
             });
             location.reload();
             console.log('user deleted successfully');
+            toast.success("User deleted successfully!")
           } catch (err) {
             console.log(err.response.data);
+            toast.error("Error in deleting user")
           }
         }
       };

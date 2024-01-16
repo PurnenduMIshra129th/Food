@@ -2,6 +2,8 @@ import  { useEffect,useState } from 'react';
 import { useCart } from './CartContext';
 import './css/shopingCart.css'
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const ShoppingCart = () => {
   const { state, dispatch } = useCart();
@@ -9,6 +11,7 @@ const ShoppingCart = () => {
 
   const removeFromCart = (product) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: product });
+    toast.success("Item removed from cart successsfuly!")
   };
   
   const incrementQuantity = (product) => {

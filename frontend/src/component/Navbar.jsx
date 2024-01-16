@@ -3,6 +3,8 @@ import { useNavigate } from "react-router-dom";
 import {useContext, useEffect } from "react";
 import { UserContext } from "../App";
 // import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Navbar() {
   const { state, dispatch } = useContext(UserContext);
@@ -27,7 +29,7 @@ function Navbar() {
     dispatch({ type: "USER", payload: false });
     console.log("logout");
     navigate('/')
-    // toast.success('user successfully Logged Out');
+    toast.success('user successfully Logged Out');
   };
   const Sidenav = () => {
     const x = cheackISLoggedIn();

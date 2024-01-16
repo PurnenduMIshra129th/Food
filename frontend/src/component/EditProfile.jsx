@@ -2,6 +2,8 @@ import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function EditProfile() {
     const [name, setName] = useState("");
@@ -32,6 +34,7 @@ function EditProfile() {
             setMobileNO(data.mobileNO);
           } catch (err) {
            console.log(err.response.data);
+           toast.error("Error in fetching user details")
           }
         };
         fetchData();
@@ -59,9 +62,11 @@ function EditProfile() {
             }
           );
           console.log('Profile Update Successfully');
+          toast.success('Profile Update Successfully')
           navigate(`/profile/${userId}`);
         } catch (err) {
          console.log(err.response.data);
+         toast.error("Error in updating user details")
         }
       };
     

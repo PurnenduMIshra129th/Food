@@ -2,6 +2,8 @@ import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function EditOrder() {
     const navigate = useNavigate();
     const params = useParams();
@@ -26,9 +28,11 @@ function EditOrder() {
             }
           );
           console.log('Order Update Successfully');
+          toast.success('Order Update Successfully')
           navigate('/manageOrder');
         } catch (err) {
          console.log(err.response.data);
+         toast.error("Error in updating order details")
         }
       };
    

@@ -3,6 +3,9 @@ import axios from 'axios';
 import { useCart } from './CartContext';
 import { useState,useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
+import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Cheackout() {
   const location = useLocation();
@@ -30,7 +33,7 @@ function Cheackout() {
   }));
   const getItem=()=>{
     if(orderItem !== null){
-      console.log("why");
+      // console.log("why");
       if(orderItem[0]?.bool === true){
         const directBuy = orderItem.map(item => ({
           name: item.name,
@@ -66,16 +69,18 @@ function Cheackout() {
     };
 
 
-    axios.post('/api/orders/newOrder', orderData, {
+    axios.post(`${BASE_URL}/api/orders/newOrder`, orderData, {
         headers: { Authorization: `Bearer ${user.token}` },
     })
-      .then(response => {
+      .then(() => {
         dispatch({ type: 'RESET_CART' });
-        console.log('Order placed successfully:', response.data);
+        // console.log('Order placed successfully:', response.data);
+        toast.success('Order placed successfully!')
         navigate('/afterOrder')
       })
       .catch(error => {
         console.error('Error placing order:', error.response.data.message);
+        toast.error("Error placing order")
       });
   };
 

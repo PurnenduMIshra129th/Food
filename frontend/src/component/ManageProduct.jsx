@@ -2,6 +2,8 @@ import { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
     data: [],
     error: null,
@@ -41,6 +43,7 @@ function ManageProduct() {
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
       } catch (err) {
         dispatch({ type: 'FETCH_ERROR', payload: err.response.data });
+        toast.error("Error in fetching prosuct details")
       }
     };
   
@@ -58,8 +61,10 @@ function ManageProduct() {
           });
           location.reload();
           console.log('product deleted successfully');
+          toast.success("product deleted successfully")
         } catch (err) {
           console.log(err);
+          toast.error("Error in deleting product")
         }
       }
     };

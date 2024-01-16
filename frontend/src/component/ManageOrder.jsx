@@ -3,6 +3,8 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import  './css/manageUser.css'
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
     data: [],
     error: null,
@@ -43,9 +45,10 @@ function ManageOrder() {
         });
     
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
-        console.log("data", result.data);
+        // console.log("data", result.data);
       } catch (err) {
         dispatch({ type: 'FETCH_ERROR', payload: err.response.data });
+        toast.error("Error in fetching order items")
       }
     };
     
@@ -64,8 +67,10 @@ function ManageOrder() {
             });
             location.reload();
             console.log('Order deleted successfully');
+            toast.success("Order deleted successfully")
           } catch (err) {
             console.log(err.response.data);
+            toast.error("Error in deleting order item")
           }
         }
       };

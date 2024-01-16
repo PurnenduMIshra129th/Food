@@ -3,6 +3,8 @@ import { useReducer, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const initialState = {
   data: [],
   error: null,
@@ -46,6 +48,7 @@ function ShowOrders() {
     } catch (err) {
       dispatch({ type: "FETCH_ERROR", payload: err.response.data });
       console.log(err.response.data);
+      toast.error("Error in fetching order items")
     }
   };
 

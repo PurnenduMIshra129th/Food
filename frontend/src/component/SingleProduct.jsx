@@ -30,6 +30,7 @@ function SingleProduct() {
       );
 
       dispatch({ type: "UPDATE_CART", payload: updatedCart });
+      toast.error("item is already in the cart!")
     } else {
       // If it doesn't exist, add a new item to the cart
       dispatch({
@@ -46,6 +47,7 @@ function SingleProduct() {
         },
       });
     }
+    toast.success("Item added to the cart successfuly!")
     navigate('/home')
   };
 
@@ -61,9 +63,6 @@ function SingleProduct() {
       description: item.description,
       bool: item.bool,
     };
-    // console.log("bool",orderItem.bool);
-
-    // Navigate to the checkout page and pass the orderItem as state
     navigate('/cheackOut',  { state: { orderItem: [orderItem] } });
   };
   useEffect(() => {
@@ -76,10 +75,10 @@ function SingleProduct() {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );
-        console.log(data);
         setData(data);
       } catch (err) {
-        console.log(err);
+        console.log(err.response.data);
+        toast.error("Error in buying food item")
       }
     };
     fetchData();

@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router-dom';
 import BASE_URL from './config';
 import { useContext} from "react"
 import { UserContext } from '../App';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 function Profile() {
   const {dispatch} = useContext(UserContext);
   const navigate = useNavigate();
@@ -22,6 +24,7 @@ function Profile() {
             console.log(data);
             setData(data);
           } catch (err) {
+            toast.error("Error in fetching user details!")
            console.log(err.response.data);
           }
         };
@@ -31,7 +34,7 @@ function Profile() {
         localStorage.removeItem('userInfo');
         dispatch({type:"USER",payload:false});
         console.log("logout");
-        // toast.success('user successfully Logged Out');
+        toast.success('user successfully Logged Out');
         navigate('/');
       };
     return (

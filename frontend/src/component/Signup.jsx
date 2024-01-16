@@ -38,10 +38,12 @@ function Signup() {
           localStorage.setItem("userInfo", JSON.stringify(data));
           dispatch({type:"USER",payload:true});
           console.log("user sucessfully signed up")
+          toast.success("user sucessfully signed up")
           navigate('/home');
           
         } catch (err) {
           console.log(err.response.data);
+          toast.error("Error in user sign up")
         }
       };
   return (
