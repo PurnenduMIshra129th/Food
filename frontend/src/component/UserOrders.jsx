@@ -2,6 +2,7 @@ import { useReducer, useEffect } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import  './css/manageUser.css'
+import BASE_URL from './config';
 const initialState = {
   data: [],
   error: null,
@@ -35,7 +36,8 @@ function UserOrders() {
     const userInfoString = localStorage.getItem('userInfo');
       const userInfo = JSON.parse(userInfoString);
     try {
-      const result = await axios.get("/api/orders/mine",{
+      const result = await axios.get(`${BASE_URL}/api/orders/mine`,
+      {
         headers: { Authorization: `Bearer ${userInfo.token}` },
       });
 

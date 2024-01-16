@@ -3,6 +3,8 @@ import Axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from '../App';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Login() {
   const {dispatch} = useContext(UserContext);
@@ -20,9 +22,11 @@ function Login() {
           dispatch({type:"USER",payload:true});
           localStorage.setItem("userInfo", JSON.stringify(data));
           console.log("user sucessfully logged in")
+          toast.success('user sucessfully logged in')
           navigate('/home')
         } catch (err) {
           console.log(err.response.data);
+          toast.error("User Login Error");
         }
       };
   return (

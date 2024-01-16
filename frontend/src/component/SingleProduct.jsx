@@ -4,6 +4,8 @@ import { useParams,useNavigate} from "react-router-dom";
 // import { useHistory } from 'react-router-dom';
 import BASE_URL from './config';
 import "./css/singleProduct.css";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 // import { useNavigate, useParams } from 'react-router-dom';
 import { useCart } from "./CartContext";

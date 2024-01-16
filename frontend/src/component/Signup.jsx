@@ -3,10 +3,12 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState ,useContext} from "react"
 import { UserContext } from '../App';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function Signup() {
-  const navigate=useNavigate();
   const {dispatch} = useContext(UserContext);
+  const navigate=useNavigate();
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [hostel, setHostel] = useState("");

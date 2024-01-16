@@ -1,6 +1,8 @@
 import { useState } from 'react'
 import axios from 'axios';
 import BASE_URL from './config';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function AddProduct() {
     const [name, setName] = useState('');
