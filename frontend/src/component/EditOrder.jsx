@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import BASE_URL from './config';
 function EditOrder() {
     const navigate = useNavigate();
     const params = useParams();
@@ -12,7 +13,7 @@ function EditOrder() {
     const userInfo = JSON.parse(userInfoString);
         try {
           await axios.put(
-            `/api/orders/updateOrders/${orderId}`,
+            `${BASE_URL}/api/orders/updateOrders/${orderId}`,
             {
               _id: orderId,
               paidConfirmed,

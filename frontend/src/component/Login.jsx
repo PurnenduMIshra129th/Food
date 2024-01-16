@@ -2,6 +2,7 @@ import { useState ,useContext} from "react";
 import Axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from '../App';
+import BASE_URL from './config';
 
 function Login() {
   const {dispatch} = useContext(UserContext);
@@ -12,14 +13,14 @@ function Login() {
     const submitHandler = async (e) => {
         e.preventDefault();
         try {
-          const { data } = await Axios.post("/api/users/signin", {
+          const { data } = await Axios.post(`${BASE_URL}/api/users/signin`, {
             email,
             password,
           });
           dispatch({type:"USER",payload:true});
           localStorage.setItem("userInfo", JSON.stringify(data));
           console.log("user sucessfully logged in")
-          navigate('/')
+          navigate('/home')
         } catch (err) {
           console.log(err.response.data);
         }

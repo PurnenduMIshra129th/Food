@@ -2,6 +2,7 @@ import { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import  './css/manageUser.css'
+import BASE_URL from './config';
 const initialState = {
     data: [],
     error: null,
@@ -34,7 +35,7 @@ function ManageUser() {
         const userInfoString = localStorage.getItem('userInfo');
         const userInfo = JSON.parse(userInfoString);
       try {
-        const result = await axios.get("/api/users/getUsers",{
+        const result = await axios.get(`${BASE_URL}/api/users/getUsers`,{
             headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
@@ -52,7 +53,7 @@ function ManageUser() {
         // console.log('id',product);
         if (window.confirm('Are you sure to delete?')) {
           try {
-            await axios.delete(`/api/users/deleteUser/${user}`, {
+            await axios.delete(`${BASE_URL}/api/users/deleteUser/${user}`, {
               headers: { Authorization: `Bearer ${userInfo.token}` },
             });
             location.reload();

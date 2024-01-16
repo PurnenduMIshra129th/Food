@@ -2,6 +2,7 @@ import "./css/home.css";
 import { useReducer, useEffect } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
+import BASE_URL from './config';
 const initialState = {
   data: [],
   error: null,
@@ -36,7 +37,7 @@ function ShowOrders() {
     const userInfo = JSON.parse(userInfoString);
     try {
       const result = await axios.get(
-        `/api/orders/getParticularOrder/${orderId}`,
+        `${BASE_URL}/api/orders/getParticularOrder/${orderId}`,
         {
           headers: { Authorization: `Bearer ${userInfo.token}` },
         }

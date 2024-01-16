@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import BASE_URL from './config';
 function EditProduct() {
     const navigate = useNavigate();
     const params = useParams(); // /product/:id
@@ -20,7 +21,7 @@ function EditProduct() {
           const userInfoString = localStorage.getItem('userInfo');
           const userInfo = JSON.parse(userInfoString);
           try {
-            const { data } = await axios.get(`/api/products/getProduct/${productId}`,{
+            const { data } = await axios.get(`${BASE_URL}/api/products/getProduct/${productId}`,{
               headers: { Authorization: `Bearer ${userInfo.token}` },
             });
             setName(data.name);
@@ -45,7 +46,7 @@ function EditProduct() {
     const userInfo = JSON.parse(userInfoString);
         try {
           await axios.put(
-            `/api/products/updateProduct/${productId}`,
+            `${BASE_URL}/api/products/updateProduct/${productId}`,
             {
               _id: productId,
               name,
@@ -72,7 +73,7 @@ function EditProduct() {
         const bodyFormData = new FormData();
         bodyFormData.append('file', file);
         try {
-          const { data } = await axios.post('/api/uploads/upload', bodyFormData, {
+          const { data } = await axios.post(`${BASE_URL}/api/uploads/upload`, bodyFormData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             },

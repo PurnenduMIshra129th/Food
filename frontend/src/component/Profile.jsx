@@ -2,7 +2,11 @@ import { useState,useEffect } from 'react'
 import axios from 'axios';
 import {  useParams } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from './config';
+import { useContext} from "react"
+import { UserContext } from '../App';
 function Profile() {
+  const {dispatch} = useContext(UserContext);
   const navigate = useNavigate();
     const params = useParams(); // /product/:id
     const { id: userId } = params; 
@@ -12,7 +16,7 @@ function Profile() {
             const userInfoString = localStorage.getItem('userInfo');
             const userInfo = JSON.parse(userInfoString);
           try {
-            const { data } = await axios.get(`/api/users/getUser/${userId}`,{
+            const { data } = await axios.get(`${BASE_URL}/api/users/getUser/${userId}`,{
                 headers: { Authorization: `Bearer ${userInfo.token}` },
             });
             console.log(data);
@@ -25,10 +29,10 @@ function Profile() {
       }, [userId]);
       const handleLogout = () =>{
         localStorage.removeItem('userInfo');
-        // dispatch({type:"USER",payload:false});
-        
+        dispatch({type:"USER",payload:false});
+        console.log("logout");
         // toast.success('user successfully Logged Out');
-        navigate('/login');
+        navigate('/');
       };
     return (
       <section style={{ backgroundColor: '#eee' }}>

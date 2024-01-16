@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import BASE_URL from './config';
 function EditUser() {
   const navigate = useNavigate();
   const params = useParams(); // /product/:id
@@ -16,7 +17,7 @@ function EditUser() {
         const userInfoString = localStorage.getItem('userInfo');
         const userInfo = JSON.parse(userInfoString);
         try {
-          const { data } = await axios.get(`/api/users/getUser/${userId}`, {
+          const { data } = await axios.get(`${BASE_URL}/api/users/getUser/${userId}`, {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           });
           setName(data.name);
@@ -41,7 +42,7 @@ function EditUser() {
   const userInfo = JSON.parse(userInfoString);
       try {
         await axios.put(
-          `/api/users/updateUser/${userId}`,
+          `${BASE_URL}/api/users/updateUser/${userId}`,
           {
             _id: userId,
             name,

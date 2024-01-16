@@ -2,6 +2,7 @@ import { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import  './css/manageUser.css'
+import BASE_URL from './config';
 const initialState = {
     data: [],
     error: null,
@@ -35,7 +36,7 @@ function ManageOrder() {
       const userInfoString = localStorage.getItem('userInfo');
       const userInfo = JSON.parse(userInfoString);
       try {
-        const result = await axios.get("/api/orders/getOrders", {
+        const result = await axios.get(`${BASE_URL}/api/orders/getOrders`, {
           headers: {
             Authorization: `Bearer ${userInfo.token}`,
           },
@@ -58,7 +59,7 @@ function ManageOrder() {
         // console.log('id',order);
         if (window.confirm('Are you sure to delete?')) {
           try {
-            await axios.delete(`/api/orders/deleteOrder/${order}`, {
+            await axios.delete(`${BASE_URL}/api/orders/deleteOrder/${order}`, {
               headers: { Authorization: `Bearer ${userInfo.token}` },
             });
             location.reload();

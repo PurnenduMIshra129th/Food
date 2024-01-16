@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import { useParams,useNavigate} from "react-router-dom";
 // import { useHistory } from 'react-router-dom';
+import BASE_URL from './config';
 import "./css/singleProduct.css";
 
 // import { useNavigate, useParams } from 'react-router-dom';
@@ -43,7 +44,7 @@ function SingleProduct() {
         },
       });
     }
-    navigate('/')
+    navigate('/home')
   };
 
   const handleBuyNow = (item) => {
@@ -69,7 +70,7 @@ function SingleProduct() {
     const userInfo = JSON.parse(userInfoString);
       try {
         const { data } = await axios.get(
-          `/api/products/getProduct/${productId}`,{
+          `${BASE_URL}/api/products/getProduct/${productId}`,{
             headers: { Authorization: `Bearer ${userInfo.token}` },
           }
         );

@@ -1,6 +1,7 @@
 import { useReducer, useEffect } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import BASE_URL from './config';
 const initialState = {
     data: [],
     error: null,
@@ -34,7 +35,7 @@ function ManageProduct() {
       const userInfoString = localStorage.getItem('userInfo');
       const userInfo = JSON.parse(userInfoString);
       try {
-        const result = await axios.get("/api/products/getProduct",{
+        const result = await axios.get(`${BASE_URL}/api/products/getProduct`,{
           headers: { Authorization: `Bearer ${userInfo.token}` },
         });
         dispatch({ type: 'FETCH_SUCCESS', payload: result.data });
@@ -52,7 +53,7 @@ function ManageProduct() {
       // console.log('id',product);
       if (window.confirm('Are you sure to delete?')) {
         try {
-          await axios.delete(`/api/products/deleteProduct/${product}`, {
+          await axios.delete(`${BASE_URL}/api/products/deleteProduct/${product}`, {
             headers: { Authorization: `Bearer ${userInfo.token}` },
           });
           location.reload();

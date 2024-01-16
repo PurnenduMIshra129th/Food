@@ -1,6 +1,8 @@
-import { useState ,useContext} from "react";import Axios from 'axios';
+import Axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
+import { useState ,useContext} from "react"
 import { UserContext } from '../App';
+import BASE_URL from './config';
 
 function Signup() {
   const navigate=useNavigate();
@@ -21,7 +23,7 @@ function Signup() {
             return;
           }
         try {
-          const { data } = await Axios.post("/api/users/signup", {
+          const { data } = await Axios.post(`${BASE_URL}/api/users/signup`, {
             name,
             email,
             hostel,
@@ -34,7 +36,7 @@ function Signup() {
           localStorage.setItem("userInfo", JSON.stringify(data));
           dispatch({type:"USER",payload:true});
           console.log("user sucessfully signed up")
-          navigate('/');
+          navigate('/home');
           
         } catch (err) {
           console.log(err.response.data);
@@ -87,7 +89,7 @@ function Signup() {
         <button className="w-100 btn btn-lg btn-primary mt-3" type="submit">Sign in</button>
         
       </form>
-      <p style={{marginTop: "10%"}}>Already have an account? <Link to="/login" style={{textDecoration: "underline"}}>Login</Link> </p>
+      <p style={{marginTop: "10%"}}>Already have an account? <Link to="/" style={{textDecoration: "underline"}}>Login</Link> </p>
     </div> 
     </div>
   )

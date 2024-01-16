@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import axios from 'axios';
+import BASE_URL from './config';
 
 function AddProduct() {
     const [name, setName] = useState('');
@@ -18,7 +19,7 @@ function AddProduct() {
     const token = userInfo.token;
       try {
         await axios.post(
-          '/api/products/addProduct',
+          `${BASE_URL}/api/products/addProduct`,
           {
             name,
             category,
@@ -48,7 +49,7 @@ function AddProduct() {
         const bodyFormData = new FormData();
         bodyFormData.append('file', file);
         try {
-          const { data } = await axios.post('/api/uploads/upload', bodyFormData, {
+          const { data } = await axios.post(`${BASE_URL}/api/uploads/upload`, bodyFormData, {
             headers: {
               'Content-Type': 'multipart/form-data',
             },

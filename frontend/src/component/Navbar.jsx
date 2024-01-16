@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import {useContext, useEffect } from "react";
 import { UserContext } from "../App";
+// import BASE_URL from './config';
 
 function Navbar() {
   const { state, dispatch } = useContext(UserContext);
@@ -25,11 +26,12 @@ function Navbar() {
     localStorage.removeItem("userInfo");
     dispatch({ type: "USER", payload: false });
     console.log("logout");
-    navigate('/login')
+    navigate('/')
     // toast.success('user successfully Logged Out');
   };
   const Sidenav = () => {
     const x = cheackISLoggedIn();
+    console.log("x main",x);
     if(x=='true'){
       const userInfoString = localStorage.getItem("userInfo");
       const userInfo = JSON.parse(userInfoString);
@@ -89,7 +91,7 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/login" onClick={handleLogout}>
+                    <Link className="nav-link" to="/" onClick={handleLogout}>
                       Logout
                     </Link>
                   </li>
@@ -125,7 +127,7 @@ function Navbar() {
                     </Link>
                   </li>
                   <li className="nav-item">
-                    <Link className="nav-link" to="/login" onClick={handleLogout}>
+                    <Link className="nav-link" to="/" onClick={handleLogout}>
                       Logout
                     </Link>
                   </li>
@@ -143,7 +145,7 @@ function Navbar() {
      else {
       return (
         <>
-          <Link to="/login"></Link>
+          <Link to="/"></Link>
         </>
       );
     }
@@ -152,7 +154,7 @@ function Navbar() {
   return (
     <nav className="navbar navbar-expand-lg bg-light m-0">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">
+        <Link className="navbar-brand" to="/home">
           Navbar
         </Link>
         <button

@@ -1,6 +1,7 @@
 import { useState,useEffect } from 'react'
 import axios from 'axios';
 import { useNavigate, useParams } from 'react-router-dom';
+import BASE_URL from './config';
 
 function EditProfile() {
     const [name, setName] = useState("");
@@ -18,7 +19,7 @@ function EditProfile() {
             const userInfoString = localStorage.getItem('userInfo');
             const userInfo = JSON.parse(userInfoString);
           try {
-            const { data } = await axios.get(`/api/users/getUser/${userId}`,{
+            const { data } = await axios.get(`${BASE_URL}/api/users/getUser/${userId}`,{
                 headers: { Authorization: `Bearer ${userInfo.token}` },
             });
             // console.log(data);
@@ -43,7 +44,7 @@ function EditProfile() {
     const userInfo = JSON.parse(userInfoString);
         try {
           await axios.put(
-            `/api/users/updateProfile/${userId}`,
+            `${BASE_URL}/api/users/updateProfile/${userId}`,
             {
               _id: userId,
               name,
